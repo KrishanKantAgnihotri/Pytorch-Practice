@@ -34,7 +34,7 @@ class CustomDataset(Dataset):
 """
 Custom defination for model
 creating init with Linear , activation function , linear function
-forward to pass the input to different layeers
+forward to pass the input to next layeers
 """
 class MyModel(nn.Module):
     def __init__(self):
@@ -47,7 +47,15 @@ class MyModel(nn.Module):
     def forward(self,x):
         return self.net(x)
     
-
+"""
+train function which is used in model training 
+follow the step like 
+- optimizer gradient reset
+- get output for current input
+- loss computation using loss function with current output and targets
+- loss backward propogation to update the weights
+- optimizer step to change the gradient for next inputs
+"""
 def train(model,dataloader,criterion,optimizer):
     model.train()
     for batch_idx,(inputs,targets) in enumerate(dataloader):
@@ -57,6 +65,11 @@ def train(model,dataloader,criterion,optimizer):
         loss = criterion(outputs,targets)
         loss.backward()
         optimizer.step()
+"""
+model.eval to evaluate the model with test data loader
+torch.nograd so that gradient_descent information is not kept so less memory is utilized
+
+"""
 def evaluate(model,dataloader):
     model.eval()
     correct = 0
