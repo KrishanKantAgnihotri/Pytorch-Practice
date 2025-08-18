@@ -43,8 +43,14 @@ for epoch in range(5):  # You can increase this for better accuracy
 
 # 🔍 Prediction on test set
 with torch.no_grad():
+    total = 0
+    correct =0
     for images, labels in test_loader:
         outputs = model(images)
         _, predicted = torch.max(outputs, 1)  # Get class with highest score
+        total += labels.size(0)
+        correct+=(predicted==labels).sum().item()
         print("Sample predictions:", predicted[:10])
+        print("total",total)
+        print("correct",correct)
         break
