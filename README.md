@@ -1,1 +1,1 @@
-##Collection of various Alogorithms Implementation using Pytorch
+***Collection of various Alogorithms Implementation using Pytorch***
